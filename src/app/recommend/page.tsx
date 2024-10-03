@@ -19,7 +19,7 @@ export default function Recommend(){
     }
     return(
         <div>
-            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY as string}>
+            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY || ""}>
                 <GoogleMap 
                     mapContainerStyle={containerStyle}
                     center={center}
