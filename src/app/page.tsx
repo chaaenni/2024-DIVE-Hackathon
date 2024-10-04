@@ -1,8 +1,24 @@
+
+
 export default function Home() {
+  const [sticky, setSticky] = useState(false);
+  const handleStickyNavbar = () => {
+    if (window.scrollY > 0) {
+      if(!sticky) {
+        setSticky(true);
+        console.log('sticky');
+      }
+    } else {
+      setSticky(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleStickyNavbar);
+  });
+
   return (
-    <div className="bg-white px-8 py-10">
-      <h2 className="text-3xl font-bold mb-10">GONZI GONZI</h2>
-      <a href="recommend" className="underline">컨셉 별 워케이션 라이프 스타일 추천</a>
+    <div className="bg-white">
+      <span>hello 채연!</span>
     </div>
   );
 }
