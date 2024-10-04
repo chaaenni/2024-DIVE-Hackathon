@@ -97,18 +97,19 @@ export default function Recommend(){
                     <p>오늘은 어떤 하루를 보내고 싶으신가요? 채연님을 위한 워케이션 계획을 세워드립니다.</p>
                 </div>
                 <div className='flex mt-10'>  {/*category button*/}
-                    <button className={`mr-3 px-5 py-3 rounded-[10px] ${isLeisure? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff]'}`} onClick={clickLeisure}>레저 / 액티비티</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[10px] text-[#ffffff]'>맛집 탐방</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[10px] text-[#ffffff]'>문화 생활</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[10px] text-[#ffffff]'>쇼핑</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[10px] text-[#ffffff]'>휴식 / 릴렉스</button>
+                    <button className={`mr-3 px-5 py-3 rounded-[20px] ${isLeisure? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff]'}`} onClick={clickLeisure}>레저 / 액티비티</button>
+                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>맛집 탐방</button>
+                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>문화 생활</button>
+                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>쇼핑</button>
+                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>휴식 / 릴렉스</button>
                     {/* 휴식/릴렉스에는  */}
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[10px] text-[#ffffff]'>워커홀릭</button>
+                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>워커홀릭</button>
                 </div> 
+                {isLeisure && <div className='mt-10 text-[20px] font-bold text-[#237cfe]'>추천 장소</div>}
                 <div className='grid grid-cols-2 gap-3 mt-5'> {/*detail places*/}
                     {isLeisure && leisure0 && leisure0.map((data, index)=>(
                         <div className='rounded-[20px] shadow overflow-hidden'>
-                            <img className='w-full h-auto object-cover' src='/detail_place/장산_폭포1.png'/>
+                            <img className='w-full h-[200px] object-cover' src={`/detail_place/leisure_data0/${data.id}.jpg`}/>
                             <div className='mt-2 px-8 py-3'>
                                 <h2 className='text-[20px] font-bold'>{data.name}</h2>
                                 <p className='text-[14px] text-[#237cfe]'>{data.category}</p>
@@ -120,6 +121,8 @@ export default function Recommend(){
                     ))
                     }
                 </div>
+                {isLeisure && <div className='mt-10 text-[20px] font-bold text-[#237cfe]'>비추천 장소</div>}
+
             </div>
         </div>
     )
