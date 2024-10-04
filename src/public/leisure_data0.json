@@ -1,0 +1,10 @@
+[{"id": 0, "name": "장산폭포", "category": "문화관광/명소", "district": "해운대구", "detail_district": "우동", "longitude": 129.1605995, "latitude": 35.1904426, "toilet": "N", "nursing": "N", "locker": "N"}, 
+    {"id": 1, "name": "해리단길", "category": "문화관광/명소", "district": "해운대구", "detail_district": "우동", "longitude": 129.1574821, "latitude": 35.16582918, "toilet": "N", "nursing": "N", "locker": "N"}, 
+    {"id": 2, "name": "부산가상증강현실융복합센터", "category": "문화관광/명소", "district": "해운대구", "detail_district": "우동", "longitude": 129.1353804, "latitude": 35.16880891, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+    {"id": 3, "name": "동백공원", "category": "문화관광/명소", "district": "해운대구", "detail_district": "우동", "longitude": 129.1522656, "latitude": 35.15394344, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+    {"id": 4, "name": "THEBAY101", "category": "레저/체육/공원", "district": "해운대구", "detail_district": "우동", "longitude": 129.1520352, "latitude": 35.1565741, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+    {"id": 5, "name": "트리니티 신세계백화점센텀시티점", "category": "레저/체육/공원", "district": "해운대구", "detail_district": "우동", "longitude": 129.1295233, "latitude": 35.16881789, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+    {"id": 7, "name": "부산요트투어", "category": "레저/체육/공원", "district": "해운대구", "detail_district": "우동", "longitude": 129.141275, "latitude": 35.16028213, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+    {"id": 8, "name": "해운대해수욕장", "category": "문화관광/명소", "district": "해운대구", "detail_district": "우동", "longitude": 129.1594775, "latitude": 35.15840394, "toilet": "Y", "nursing": "Y", "locker": "Y"}, 
+    {"id": 9, "name": "부산영화촬영스튜디오", "category": "문화관광/명소", "district": "해운대구", "detail_district": "우동", "longitude": 129.1379739, "latitude": 35.16244277, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+    {"id": 10, "name": "CGN아쿠아리움", "category": "문화관광/명소", "district": "강서구", "detail_district": "대저1동", "longitude": 128.9757953, "latitude": 35.20910328, "toilet": "N", "nursing": "N", "locker": "N"}]
