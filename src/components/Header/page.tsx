@@ -38,7 +38,7 @@ export default function Header() {
         </nav>
       </div>
       <div className={classNames(
-                    (sticky ? 'h-[80px] fixed top-0 border-b //bg-black //bg-opacity-20' : 'h-[70px] absolute top-[40px]'),
+                    (sticky ? 'h-[70px] fixed top-0 border-b border-gray-200 shadow-md bg-black bg-opacity-15 backdrop-blur-sm' : 'h-[70px] absolute top-[40px]'),
                     "left-0 w-full",
                   )}>
         <div className="h-full border-b/// items-center flex justify-between px-4">
@@ -46,7 +46,7 @@ export default function Header() {
           <Link href="/" className="mx-4 flex">
             <Image src="/logo/logo_white.png" width={52} height={52} alt="logo"></Image>
             <div className="px-4 table">
-              <span className="table-cell align-middle text-white text-4xl font-semibold">wayBusan</span>
+              <span className="table-cell align-middle text-white text-3xl font-semibold">wayBusan</span>
             </div>
           </Link>
           {/** menu */}
@@ -54,13 +54,16 @@ export default function Header() {
             <nav>
               <ul className="flex font-bold text-lg gap-6">
                 <li className="px-4">
-                  <a href="/myworkation" className="text-white">나만의 워케이션</a>
+                  <Link href="/myworkation" className="text-white hover:border-b pb-1 hover:font-extrabold">나만의 워케이션</Link>
                 </li>
                 <li className="px-4">
-                  <a href="/community" className="text-white">커뮤니티</a>
+                  <Link href="/community" className="text-white hover:border-b pb-1 hover:font-extrabold">커뮤니티</Link>
                 </li>
                 <li className="px-4">
-                  <a href="#" className="text-white">부산이라 좋다</a>
+                  <Link href="#" className="text-white hover:border-b pb-1 hover:font-extrabold">매거진</Link>
+                </li>
+                <li className="px-4">
+                  <Link href="/housing" className="text-white hover:border-b pb-1 hover:font-extrabold">부산이라 좋다</Link>
                 </li>
               </ul>
             </nav>

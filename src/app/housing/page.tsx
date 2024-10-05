@@ -48,7 +48,7 @@ export default function Housing(){
                     <p className="mt-8 text-[16px] text-[#ffffff]">부산으로의 정착을 고민하시는 분들께, 현실적이고 직관적인 주택 정보를 제공합니다.</p>
                 </div>
             </div>
-            <div className="mt-12 px-8 px-10">
+            <div className="mt-12 px-10">
                 {/* poll for selecting most reasonable housing type */}
                 <div className="text-center"> 
                     <h2 className="text-[36px] font-bold">가장 <span className="text-[#237cfe]">합리적</span>이게, 가장 <span className="text-[#237cfe]">편리</span>하게.</h2>
