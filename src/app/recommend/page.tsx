@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { GoogleMap, LoadScript, Marker, MarkerF } from '@react-google-maps/api';
 
 interface mapContainerStyle{
@@ -25,8 +26,8 @@ interface leisureData{
 
 export default function Recommend(){
     const containerStyle:mapContainerStyle = {
-        width: '700px',
-        height: '950px'
+        width: '100%',
+        height: '900px'
     }
     const center = {
         lat: 35.172418, //latitude(위도)
@@ -73,56 +74,66 @@ export default function Recommend(){
     }, [])
     
     return(
-        <div className='bg-white flex'>
-            <div className='fixed float-left w-[50%] top-0 left-0 inline'>
-                <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}>
-                    <GoogleMap 
-                    mapContainerStyle={containerStyle}
-                    center={center}
-                    zoom={14}>
-                        {isLeisure && leisure0 && leisure0.map((data, index)=>(
-                            <MarkerF 
-                                position={{lat:data.latitude, lng:data.longitude}}
-                            />      
-                        ))}
-                    </GoogleMap>
-                </LoadScript>
+        <div className='mx-auto w-full '>
+            <div className="fixed w-full h-[200px] text-center bg-cover bg-middle">
+                <Image src="/bg1.jpg" alt="main" layout='fill' objectFit="cover" 
+                className=' absolute w-full h-full object-cover brightness-[.8]' />
+                <div className='absolute flex flex-col -translate-x-1/2 top-[57%] left-[50%] mx-auto -translate-y-1/2'>
+                    {/**<span className='text-white pb-[12px] text-lg sm:text-xl'>New Lifestyle in Busan</span>*/}
+                    <span className=' text-white text-4xl font-bold mx-auto'>New Lifestyle in Busan</span>
+                </div>
             </div>
-            <div className='w-[50%]'></div>
-            <div className='float-right w-[55%] flex flex-col px-8 py-10'>
-                <div className='clear-both'> {/*title*/}
-                    <h2 className='text-[28px] font-bold'>{type[0]}, 채연님!</h2>
-                    <h4 className='mt-3 text-[20px] font-bold text-[#999999]'>남은 워케이션 기간: {remain_day[0]} day</h4>
-                    <div className='mt-5'></div>
-                    <p>오늘은 어떤 하루를 보내고 싶으신가요? 채연님을 위한 워케이션 계획을 세워드립니다.</p>
+            <div className='bg-white flex'>
+                <div className='fixed float-left w-[40%] top-[220px] left-0 inline'>
+                    <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}>
+                        <GoogleMap 
+                        mapContainerStyle={containerStyle}
+                        center={center}
+                        zoom={14}>
+                            {isLeisure && leisure0 && leisure0.map((data, index)=>(
+                                <MarkerF 
+                                    position={{lat:data.latitude, lng:data.longitude}}
+                                />      
+                            ))}
+                        </GoogleMap>
+                    </LoadScript>
                 </div>
-                <div className='flex mt-10'>  {/*category button*/}
-                    <button className={`mr-3 px-5 py-3 rounded-[20px] ${isLeisure? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff]'}`} onClick={clickLeisure}>레저 / 액티비티</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>맛집 탐방</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>문화 생활</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>쇼핑</button>
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>휴식 / 릴렉스</button>
-                    {/* 휴식/릴렉스에는  */}
-                    <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>워커홀릭</button>
-                </div> 
-                {isLeisure && <div className='mt-10 text-[20px] font-bold text-[#237cfe]'>추천 장소</div>}
-                <div className='grid grid-cols-2 gap-3 mt-5'> {/*detail places*/}
-                    {isLeisure && leisure0 && leisure0.map((data, index)=>(
-                        <div className='rounded-[20px] shadow overflow-hidden'>
-                            <img className='w-full h-[200px] object-cover' src={`/detail_place/leisure_data0/${data.id}.jpg`}/>
-                            <div className='mt-2 px-8 py-3'>
-                                <h2 className='text-[20px] font-bold'>{data.name}</h2>
-                                <p className='text-[14px] text-[#237cfe]'>{data.category}</p>
-                                <p className='text-[14px]'><span>{data.district}</span> {data.detail_district}</p>
-                                <div className='mt-3 mb-5'><span className='bg-[#59B0FF] rounded-[50px] text-[9px] text-white px-3 py-2 font-bold'>화장실: {data.toilet}</span> <span className='bg-[#59B0FF] rounded-[50px] text-[9px] text-white px-3 py-2 font-bold'>수유실: {data.nursing}</span> <span className='bg-[#59B0FF] rounded-[50px] text-[9px] text-white px-3 py-2 font-bold'>물품보관소: {data.locker}</span></div>
+                <div className=' w-[40%]'></div>
+                <div className='float-right w-[60%] flex flex-col px-8 py-10 pt-[220px]'>
+                    <div className='clear-both'> {/*title*/}
+                        <h2 className='text-[28px] font-bold'>{type[0]}, 채연님!</h2>
+                        {/**<h4 className='mt-3 text-[20px] font-bold text-[#999999]'>남은 워케이션 기간: {remain_day[0]} day</h4>*/}
+                        <div className='mt-2'></div>
+                        <p>오늘은 어떤 하루를 보내고 싶으신가요? 채연님을 위한 워케이션 계획을 세워드립니다.</p>
+                    </div>
+                    <div className='flex mt-7 tracking-tight'>  {/*category button*/}
+                        <button className={`mr-3 px-5 py-3 rounded-[20px] ${isLeisure? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff]'}`} onClick={clickLeisure}>레저 / 액티비티</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>맛집 탐방</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>문화 생활</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>쇼핑</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>휴식 / 릴렉스</button>
+                        {/* 휴식/릴렉스에는  */}
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[20px] text-[#ffffff]'>워커홀릭</button>
+                    </div> 
+                    {isLeisure && <div className='mt-7 text-[20px] font-bold text-[#237cfe]'>추천 장소</div>}
+                    <div className='grid grid-cols-2 gap-3 mt-5'> {/*detail places*/}
+                        {isLeisure && leisure0 && leisure0.map((data, index)=>(
+                            <div className='rounded-[20px] shadow overflow-hidden'>
+                                <img className='w-full h-[200px] object-cover' src={`/detail_place/leisure_data0/${data.id}.jpg`}/>
+                                <div className='mt-2 px-8 py-3'>
+                                    <h2 className='text-[20px] font-bold'>{data.name}</h2>
+                                    <p className='text-[14px] text-[#237cfe]'>{data.category}</p>
+                                    <p className='text-[14px]'><span>{data.district}</span> {data.detail_district}</p>
+                                    <div className='mt-3 mb-5'><span className='bg-[#59B0FF] rounded-[50px] text-[9px] text-white px-3 py-2 font-bold'>화장실: {data.toilet}</span> <span className='bg-[#59B0FF] rounded-[50px] text-[9px] text-white px-3 py-2 font-bold'>수유실: {data.nursing}</span> <span className='bg-[#59B0FF] rounded-[50px] text-[9px] text-white px-3 py-2 font-bold'>물품보관소: {data.locker}</span></div>
 
+                                </div>
                             </div>
-                        </div>
-                    ))
-                    }
-                </div>
-                {isLeisure && <div className='mt-10 text-[20px] font-bold text-[#237cfe]'>비추천 장소</div>}
+                        ))
+                        }
+                    </div>
+                    {isLeisure && <div className='mt-10 text-[20px] font-bold text-[#237cfe]'>비추천 장소</div>}
 
+                </div>
             </div>
         </div>
     )
