@@ -81,49 +81,7 @@ export default function Home() {
   return (
     <div className="m-0 p-0 block">
       {/** header */}
-      <header className="relative w-full z-[999] align-top">
-        <div className="h-[40px] border-b absolute top-0 left-0 w-full">
-          <div className="float-left px-8 h-full flex items-center">
-            <span className="text-white ">workation 을 통해서 Busan으로의 지속가능한 파동을 발생시키다.</span>
-          </div>
-          <nav className="relative px-8 h-full w-full">
-            <div className="h-full float-right flex items-center">
-              <div className="text-white px-3">ENG</div>
-              <div className="text-white px-3">KOR</div>
-            </div>
-          </nav>
-        </div>
-        <div className={classNames(
-                      (sticky ? 'h-[80px] fixed top-0 border-b bg-black bg-opacity-20' : 'h-[70px] absolute top-[40px]'),
-                      "left-0 w-full",
-                    )}>
-          <div className="h-full border-b/// items-center flex justify-between px-4">
-            {/** logo */}
-            <div className="mx-4 flex">
-              <Image src="/logo/logo_white.png" width={52} height={52} alt="logo"></Image>
-              <div className="px-4 table">
-                <span className="table-cell align-middle text-white text-4xl font-semibold">wayBusan</span>
-              </div>
-            </div>
-            {/** menu */}
-            <div className="mx-4">
-              <nav>
-                <ul className="flex font-bold text-lg gap-6">
-                  <li className="px-4">
-                    <a href="/myworkation" className="text-white">나만의 워케이션</a>
-                  </li>
-                  <li className="px-4">
-                    <a href="/community" className="text-white">커뮤니티</a>
-                  </li>
-                  <li className="px-4">
-                    <a href="#" className="text-white">부산이라 좋다</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </header>
+      
 
       {/** main */}
       <div className="relative w-full block m-0 p-0">
@@ -326,9 +284,11 @@ export default function Home() {
             <div className="relative overflow-hidden min-h-[350px]">
               
               <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <span className="text-black text-sm mb-2 border border-black px-2 py-1 rounded w-fit">계절보양여행</span>
-                <h2 className="text-black text-2xl font-bold mb-2">온천관광휴양지</h2>
-                <p className="text-black text-sm">국내 유일 자연온천으로 유명한 울진의 온천관광특구를 소개합니다.</p>
+                <h2 className="text-black text-2xl font-bold mb-2">Workation Lifestyle in Busan</h2>
+                <p className="text-black text-sm">개성있는 워케이션 라이프스타일을 소개합니다.</p>
+                <button className="mt-8 text-black text-sm  py-0 rounded-full inline-flex items-center justify-start">
+                  <span></span>직접 경험해보기 <ArrowRight className="ml-2 h-4 w-4 flex" />
+                </button>
               </div>
             </div>
             {/* review 1 */}
