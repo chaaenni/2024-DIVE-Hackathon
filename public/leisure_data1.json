@@ -1,0 +1,8 @@
+[{"id": 0, "name": "신세계 센텀시티 아이스링크", "category": "레저/체육/공원", "district": "해운대구", "detail_district": "우동", "longitude": 129.1293508, "latitude": 35.16852737, "toilet": "Y", "nursing": "Y", "locker": "Y"}, 
+{"id": 1, "name": "볼원볼링장", "category": "레저/체육/공원", "district": "해운대구", "detail_district": "우동", "longitude": 129.1284181, "latitude": 35.17206326, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+{"id": 3, "name": "센텀마리나파크", "category": "레저/체육/공원", "district": "해운대구", "detail_district": "우동", "longitude": 129.126273, "latitude": 35.16880243, "toilet": "N", "nursing": "N", "locker": "N"},  
+{"id": 8, "name": "제일낚시터", "category": "레저/체육/공원", "district": "강서구", "detail_district": "강동동", "longitude": 128.9404144, "latitude": 35.22365705, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+{"id": 9, "name": "강동에이스배트민턴전용구장", "category": "레저/체육/공원", "district": "강서구", "detail_district": "강동동", "longitude": 128.9201375, "latitude": 35.18500113, "toilet": "N", "nursing": "N", "locker": "N"}, 
+{"id": 10, "name": "태양승마장", "category": "레저/체육/공원", "district": "강서구", "detail_district": "대저2동", "longitude": 128.9538277, "latitude": 35.15685433, "toilet": "Y", "nursing": "N", "locker": "Y"}, 
+{"id": 11, "name": "클라이맥스클라이밍", "category": "레저/체육/공원", "district": "강서구", "detail_district": "명지동", "longitude": 128.9224219, "latitude": 35.09814335, "toilet": "Y", "nursing": "N", "locker": "N"}, 
+{"id": 12, "name": "부산수상레포츠스쿨", "category": "레저/체육/공원", "district": "강서구", "detail_district": "봉림동", "longitude": 128.9005227, "latitude": 35.17121164, "toilet": "Y", "nursing": "N", "locker": "Y"}]
