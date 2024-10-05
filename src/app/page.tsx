@@ -4,12 +4,50 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
+import { Input, Description, Textarea } from "@headlessui/react";
+import { Field, Label, Radio, RadioGroup } from '@headlessui/react'
+
+import { TextGenerateEffect } from "@/components/ui/textgen";
+
+
 //import { Button } from "@/components/ui/button"
 //import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronDown, RefreshCw, ArrowRight } from "lucide-react"
+
+import { ChevronDown, RefreshCw, ArrowRight, X, CircleCheck } from "lucide-react"
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
+}
+
+
+
+interface UserData {
+  name: string
+  email: string
+  company: string
+  role: string
+  experience: string
+  interests: string[]
+  notifications: boolean
+  username: string
+  password: string
+}
+
+const initialUserData: UserData = {
+  name: "",
+  email: "",
+  company: "",
+  role: "",
+  experience: "",
+  interests: [],
+  notifications: false,
+  username: "",
+  password: "",
+}
+
+interface StepProps {
+  userData: UserData
+  updateUserData: (field: keyof UserData, value: any) => void
 }
 
 const tabsData = [
@@ -77,6 +115,66 @@ export default function Home() {
 
   const [activeTab, setActiveTab] = useState('tab1');
 
+  const [loading, setLoading] = useState(false);
+
+  const [step, setStep] = useState<number>(1)
+  const [userData, setUserData] = useState<UserData>(initialUserData)
+
+  const updateUserData = (field: keyof UserData, value: any) => {
+    setUserData((prev) => ({ ...prev, [field]: value }))
+  }
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const nextStep = () => {
+    setStep((prev) => Math.min(prev + 1, 5));
+    setCurrentIndex(0);
+  }
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1))
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <Step1 userData={userData} updateUserData={updateUserData} />
+      case 2:
+        return <Step2 userData={userData} updateUserData={updateUserData} />
+      case 3:
+        return <Step3 userData={userData} updateUserData={updateUserData} />
+      case 4:
+        return <Step4 userData={userData} updateUserData={updateUserData} />
+      default:
+        return null
+    }
+  }
+
+  
+  
+  const messages = [
+    "맞춤형 워케이션 스타일을 분석 중입니다.",
+    "맞춤형 워케이션 스타일을 분석 중입니다..",
+    "맞춤형 워케이션 스타일을 분석 중입니다...",
+    "맞춤형 워케이션 스타일을 분석 중입니다....",
+    "맞춤형 워케이션 스타일을 분석 중입니다.....",
+    "맞춤형 워케이션 스타일을 분석 중입니다......",
+    "완료되었습니다!",
+  ];
+
+  useEffect(() => {
+    if (currentIndex >= messages.length - 1) {
+      return;
+    }
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % messages.length);
+    }, 700); // 3초마다 실행
+
+    // 컴포넌트가 언마운트되면 setInterval을 정리
+    return () => clearInterval(intervalId);
+  }, [currentIndex, messages.length]);
+
+  const [my_style, setMyStyle] = useState(0);
+  const my_profit_style = [
+    {f: "온전한 휴식", s: "바다", t: "여유를 느끼며"},
+    {f: "재밌는 액티비티", s:"바다", t: "서핑을 하며"}
+  ]
 
   return (
     <div className="m-0 p-0 block">
@@ -85,6 +183,7 @@ export default function Home() {
 
       {/** main */}
       <div className="relative w-full block m-0 p-0">
+        
         {/** Section 1 */}
         <div className="relative w-full overflow-hidden block">
           {/** background */}
@@ -117,19 +216,56 @@ export default function Home() {
 
         {/** 워케이션 취향 섹션 */}
         <div className="container mx-auto px-4 py-20 mt-8 mb-6">
+          {loading && (
+            <>
+              <div className="w-full h-full fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-2xl">
+                {/**<div className="bg-gradient-to-t inset-x-0 z-20 bottom-0 bg-white dark:bg-black h-full absolute [mask-image:radial-gradient(900px_at_center,transparent_30%,white)]" />*/}
+                <div className="z-[999] text-white w-[500px]">
+                  {renderStep()}
+                  <div className="items-center p-6 flex justify-between">
+                    {(step > 1) && (step < 4) && (
+                      <button onClick={prevStep} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                        Previous
+                      </button>
+                    )}
+                    {step < 4 && <button onClick={nextStep} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Next</button>}
+                    {step === 4 && <button onClick={nextStep} className="backdrop-blur-lg inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Done</button>}
+                    {step === 5 && <div className="text-2xl font-bold">{messages[currentIndex]}</div>}
+                  </div>
+                  
+                </div>
+                <div className="inset-x-0 z-20 bottom-0 h-full absolute lbg-[url('/survey/bg.jpg')] brightness-[.8] bg-cover" style={{ backgroundImage: "url('/survey/bg.jpg')", }}></div>
+              </div>
+            </>
+          )}
+          {loading && (
+            <button
+              className="fixed top-4 right-4 text-black dark:text-white z-[120]"
+              onClick={() => {
+                setLoading(false);
+                setMyStyle(1);
+              }}
+            >
+              <X className="h-10 w-10 stroke-white" />
+            </button>
+          )}
           <header className="text-center mb-16">
-            <h1 className="text-3xl font-semibold mb-4">
-              나는 <span className="underline font-extrabold decoration-wavy decoration-yellow-400">온전한 휴식</span>이 있는 워케이션을 원해요.
+            <h1 className="text-3xl font-semibold mb-4 inline-flex">
+              나는 {' '}{ my_style ? <span className="underline font-extrabold decoration-wavy decoration-yellow-400"><TextGenerateEffect className="font-extrabold text-3xl pl-2" words={my_profit_style[0].f}/></span> : 
+              <span className="underline font-extrabold decoration-wavy decoration-yellow-400">{my_profit_style[1].f}</span> }이 있는 워케이션을 원해요.
             </h1>
             <h2 className="text-xl mb-6">
-              <span className="underline decoration-wavy decoration-blue-400 font-semibold">바다</span>에서{" "}
-              <span className="underline decoration-wavy decoration-green-400 font-semibold">여유를 느끼며</span> 지내고 싶어요
+              <span className="underline decoration-wavy decoration-blue-400 font-bold inline-flex">{my_style ? <span><TextGenerateEffect className="pl-1" words={my_profit_style[0].s}/></span> : <span>{my_profit_style[1].s}</span>}</span>에서{" "}
+              <span className="underline decoration-wavy decoration-green-400 font-bold inline-flex">{my_style ? <span><TextGenerateEffect className="pl-1" words={my_profit_style[0].t}/></span> : <span>{my_profit_style[1].t}</span>}</span> 지내고 싶어요
             </h2>
             <div className="flex justify-center gap-4">
               <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-full">
                 다른 취향 보기 <RefreshCw className="ml-2 h-4 w-4" />
               </button>
-              <button className="//bg-black bg-blue-600 text-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-full">
+              <button onClick={() => {
+                setLoading(true);
+                setStep(1);
+              }} className="//bg-black bg-blue-600 text-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-full">
                 나의 워케이션 로망은? <ChevronDown className="ml-2 h-4 w-4" />
               </button>
             </div>
@@ -160,7 +296,7 @@ export default function Home() {
                     <div className="absolute inset-0 flex items-end justify-start group-hover:opacity-0 rounded-lg">
                       <p className="text-white text-lg font-semibold whitespace-nowrap inline-flex p-6 items-center justify-center">{card.description} <ArrowRight className="ml-2 h-4 w-4" /></p>
                     </div>
-                    <Link href="" className="rounded-lg absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden">
+                    <Link href="/recommend" className="rounded-lg absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 overflow-hidden">
                       <p className="text-lg">{card.hover_text}</p>
                     </Link>
                   </div>
@@ -414,15 +550,6 @@ export default function Home() {
                 <span>정보 알아보기</span>
               </button>
             </div>
-{/** 
-            <div className="grid grid-cols-2 gap-4">
-              <button className="flex items-center justify-between bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-4 text-white">
-                <span>관광불편신고</span>
-              </button>
-              <button className="flex items-center justify-between bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-4 text-white">
-                <span>관광정보 통틀/수정</span>
-              </button>
-            </div>*/}
           </div>
         </div>
       </div>
@@ -434,4 +561,165 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+const Step1:React.FC<StepProps> = ({ userData, updateUserData}) => {
+  return (
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-lg mx-auto backdrop-blur-lg">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">기본 정보</h3>
+      </div>
+      <div className="p-6">
+        <div className="space-y-4" >
+          <Field>
+          <Label className="text-sm/6 font-medium text-white">이름</Label>
+            <Input
+              className={classNames(
+                'mt-3 block w-full rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white',
+                'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+              )}
+            />
+            <div className="pt-4">
+              <Field>
+                <Label className="text-sm/6 font-medium text-white">숙박 장소</Label>
+                <Description className="text-sm/6 text-white/50">혹은 메인 근무지를 입력해 주세요.</Description>
+                <Textarea
+                  className={classNames(
+                    'mt-3 block w-full resize-none rounded-lg border-none bg-white/5 py-1.5 px-3 text-sm/6 text-white',
+                    'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25'
+                  )}
+                  rows={3}
+                />
+              </Field>
+            </div>
+          </Field>
+        </div>
+      </div>
+      <div className="items-center p-6 flex justify-between"></div>
+    </div>
+  )
+}
+
+const workation_type = [
+  {name: "레저 및 스포츠", des: "푸켓 특급 리조트"},
+  {name: "문화 체험", des: "푸켓 요트 투어"},
+  {name: "힐링", des: "푸켓 마사지 패키지"},
+  {name: "휴양", des: "푸켓 특급 리조트"},
+  {name: "기타", des: "푸켓 요트 투어"},
+]
+
+const Step2:React.FC<StepProps> = ({ userData, updateUserData}) => {
+  let [selected, setSelected] = useState(workation_type[0])
+
+  return (
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-lg mx-auto backdrop-blur-lg">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">여행 유형</h3>
+      </div>
+      <div className="p-6">
+        <div className="space-y-4" >
+        <RadioGroup value={selected} onChange={setSelected} aria-label="Server size" className="space-y-2">
+          {workation_type.map((plan) => (
+            <Radio
+              key={plan.name}
+              value={plan}
+              className="group relative flex cursor-pointer rounded-lg bg-white/5 py-4 px-5 text-white shadow-md transition focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-white/10"
+            >
+              <div className="flex w-full items-center justify-between">
+                <div className="text-sm/6">
+                  <p className="font-semibold text-white">{plan.name}</p>
+                  <div className="flex gap-2 text-white/50">
+                    <div>{plan.des}</div>
+                    <div aria-hidden="true">&middot;</div>
+                  </div>
+                </div>
+                <CircleCheck color="#FFFFFF" className="size-6 opacity-0 transition group-data-[checked]:opacity-100" />
+              </div>
+            </Radio>
+          ))}
+        </RadioGroup>
+        </div>
+      </div>
+      <div className="items-center p-6 flex justify-between"></div>
+    </div>
+  )
+}
+
+const work_type = [
+  {name: "기업", des: "푸켓 특급 리조트"},
+  {name: "프리랜서", des: "푸켓 요트 투어"},
+  {name: "기타", des: ""},
+]
+
+const Step3:React.FC<StepProps> = ({ userData, updateUserData}) => {
+  let [selected, setSelected] = useState(work_type[0])
+
+  return (
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-lg mx-auto backdrop-blur-lg">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">비즈니스 유형</h3>
+      </div>
+      <div className="p-6">
+        <div className="space-y-4" >
+        <RadioGroup value={selected} onChange={setSelected} aria-label="Server size" className="space-y-2">
+          {work_type.map((plan) => (
+            <Radio
+              key={plan.name}
+              value={plan}
+              className="group relative flex cursor-pointer rounded-lg bg-white/5 py-4 px-5 text-white shadow-md transition focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-white/10"
+            >
+              <div className="flex w-full items-center justify-between">
+                <div className="text-sm/6">
+                  <p className="font-semibold text-white">{plan.name}</p>
+
+                </div>
+                <CircleCheck color="#FFFFFF" className="size-6 opacity-0 transition group-data-[checked]:opacity-100" />
+              </div>
+            </Radio>
+          ))}
+        </RadioGroup>
+        </div>
+      </div>
+      <div className="items-center p-6 flex justify-between"></div>
+    </div>
+  )
+}
+
+const drive_type = [
+  {name: "자차", des: "푸켓 특급 리조트"},
+  {name: "뚜벅이", des: "푸켓 요트 투어"},
+  {name: "자전거", des: ""},
+]
+
+const Step4:React.FC<StepProps> = ({ userData, updateUserData}) => {
+  let [selected, setSelected] = useState(drive_type[0])
+
+  return (
+    <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full max-w-lg mx-auto backdrop-blur-lg">
+      <div className="flex flex-col space-y-1.5 p-6">
+        <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">기타</h3>
+      </div>
+      <div className="p-6">
+        <div className="space-y-4" >
+        <RadioGroup value={selected} onChange={setSelected} aria-label="Server size" className="space-y-2">
+          {drive_type.map((plan) => (
+            <Radio
+              key={plan.name}
+              value={plan}
+              className="group relative flex cursor-pointer rounded-lg bg-white/5 py-4 px-5 text-white shadow-md transition focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-white/10"
+            >
+              <div className="flex w-full items-center justify-between">
+                <div className="text-sm/6">
+                  <p className="font-semibold text-white">{plan.name}</p>
+                </div>
+                <CircleCheck color="#FFFFFF" className="size-6 opacity-0 transition group-data-[checked]:opacity-100" />
+              </div>
+            </Radio>
+          ))}
+        </RadioGroup>
+        </div>
+      </div>
+      <div className="items-center p-6 flex justify-between"></div>
+    </div>
+  )
 }
