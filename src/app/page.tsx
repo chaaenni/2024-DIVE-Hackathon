@@ -9,18 +9,11 @@ import { Field, Label, Radio, RadioGroup } from '@headlessui/react'
 
 import { TextGenerateEffect } from "@/components/ui/textgen";
 
-
-//import { Button } from "@/components/ui/button"
-//import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-
 import { ChevronDown, RefreshCw, ArrowRight, X, CircleCheck } from "lucide-react"
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
 }
-
-
-
 interface UserData {
   name: string
   email: string
@@ -206,7 +199,7 @@ export default function Home() {
           </div>
           {/** middle content */}
           <div className="absolute top-[40%] left-[50%] -translate-x-2/4 -translate-y-2/4 text-center">
-            <h2 className="text-[48px] text-white font-bold leading-tight p-4 ">내 인생의 터닝포인트가 될 <br/>워케이션을 위해,</h2>
+            <h2 className="text-[48px] text-white font-bold leading-tight p-4 ">당신의 인생에서 터닝포인트가 될 <br/>워케이션을 위해,</h2>
             <span className="text-white text-xl">Workation-ing</span>
           </div>
           {/** bottom background */}
@@ -255,7 +248,7 @@ export default function Home() {
           <header className="text-center mb-16">
             <h1 className="text-3xl font-semibold mb-4 inline-flex">
               나는 {' '}{ my_style ? <span className="underline font-extrabold decoration-wavy decoration-yellow-400"><TextGenerateEffect className="font-extrabold text-3xl pl-2" words={my_profit_style[0].f}/></span> : 
-              <span className="underline font-extrabold decoration-wavy decoration-yellow-400">{my_profit_style[1].f}</span> }이 있는 워케이션을 원해요.
+              <span className="underline font-extrabold decoration-wavy decoration-yellow-400">{my_profit_style[1].f}</span> }이{`(가)`} 있는 워케이션을 원해요.
             </h1>
             <h2 className="text-xl mb-6">
               <span className="underline decoration-wavy decoration-blue-400 font-bold inline-flex">{my_style ? <span><TextGenerateEffect className="pl-1" words={my_profit_style[0].s}/></span> : <span>{my_profit_style[1].s}</span>}</span>에서{" "}
@@ -539,9 +532,9 @@ export default function Home() {
                 <h3 className="text-white text-2xl font-bold mb-2">Life in Busan</h3>
                 <p className="text-white text-sm mb-8">부산에서 한번 살아보는 거 어때</p>
                 <div className="flex space-x-4">
-                  <a href="/housing">
+                  <Link href="/housing">
                     <button className="text-white hover:underline">어디서 지내? </button>
-                  </a>
+                  </Link>
                   <button className="text-white hover:underline">어떻게 살아? </button>
                 </div>
               </div>
