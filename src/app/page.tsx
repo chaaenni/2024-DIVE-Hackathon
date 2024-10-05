@@ -197,13 +197,16 @@ export default function Home() {
                     alt="bg1"
                     fill={true}
                     className="w-auto max-w-none relative object-cover brightness-[.70]"></Image>
+                  {/* <video autoPlay loop muted playsInline width="100%" className="brightness-[.6]">
+                    <source src="housing/wave.mp4"/>
+                </video>   */}
                 </div>
               </div>
             </div>
           </div>
           {/** middle content */}
           <div className="absolute top-[40%] left-[50%] -translate-x-2/4 -translate-y-2/4 text-center">
-            <h2 className="text-[52px] text-white font-bold leading-tight p-4 ">내 인생의 터닝포인트가 될 <br/>워케이션을 위해</h2>
+            <h2 className="text-[48px] text-white font-bold leading-tight p-4 ">내 인생의 터닝포인트가 될 <br/>워케이션을 위해,</h2>
             <span className="text-white text-xl">Workation-ing</span>
           </div>
           {/** bottom background */}
@@ -536,7 +539,9 @@ export default function Home() {
                 <h3 className="text-white text-2xl font-bold mb-2">Life in Busan</h3>
                 <p className="text-white text-sm mb-8">부산에서 한번 살아보는 거 어때</p>
                 <div className="flex space-x-4">
-                  <button className="text-white hover:underline">어디서 지내? </button>
+                  <a href="/housing">
+                    <button className="text-white hover:underline">어디서 지내? </button>
+                  </a>
                   <button className="text-white hover:underline">어떻게 살아? </button>
                 </div>
               </div>
