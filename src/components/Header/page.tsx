@@ -25,7 +25,7 @@ export default function Header() {
   });
 
   return (
-    <header className="relative w-full z-[999] align-top">
+    <header className="relative w-full z-[99] align-top">
       <div className="h-[40px] border-b absolute top-0 left-0 w-full">
         <div className="float-left px-8 h-full flex items-center">
           <span className="text-white ">workation 을 통해서 Busan으로의 지속가능한 파동을 발생시키다.</span>
