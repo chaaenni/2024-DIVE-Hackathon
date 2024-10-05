@@ -43,6 +43,14 @@ interface StepProps {
   updateUserData: (field: keyof UserData, value: any) => void
 }
 
+interface companyData 
+{
+  "id": number;
+  "name": string;
+  "category": string|any;
+  "des": string;
+}
+
 const tabsData = [
   {
     id: 'tab1',
@@ -162,6 +170,16 @@ export default function Home() {
     // 컴포넌트가 언마운트되면 setInterval을 정리
     return () => clearInterval(intervalId);
   }, [currentIndex, messages.length]);
+
+  const [startUp, setStartUp] = useState<companyData[] | null>(null)
+
+  useEffect(()=>{
+    fetch('/startup.json').then(res=>res.json())
+    .then(data=>setStartUp(data))
+  },[])
+
+  const slicedStartUp = startUp? startUp.slice(0, 4) : null
+
 
   const [my_style, setMyStyle] = useState(0);
   const my_profit_style = [
@@ -343,15 +361,40 @@ export default function Home() {
 */}
 
         {/** Section 2 */}
-        <div className="container mx-auto px-4 py-8 relative">
+        <div className="container mx-auto mb-10 px-4 py-8 relative">
           <header className="mb-8">
-            <h2 className="text-sm text-gray-600 mb-2">주요사업</h2>
+            <h2 className="text-sm text-gray-600 mb-2">네트워킹</h2>
             <h1 className="text-4xl font-bold mb-2">
-              국내 관광업계 <span className="text-gray-400">활성화를 위해</span>
+              부산 현지 근무자와의 <span className="text-gray-400">스몰미팅을 통해</span>
             </h1>
-            <p className="text-2xl text-gray-700">다양한 사업을 추진합니다</p>
+            <p className="text-2xl text-gray-700">장기적인 인적 네트워크를 형성하세요.</p>
           </header>
 
+          <div className=" grid grid-cols-2 gap-4">
+            {slicedStartUp && slicedStartUp.map((data, index)=>(
+                <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-[120px]">
+                <div className="flex flex-row p-4 px-6 border-b">
+                  <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                    {data.name}
+                  </h3>
+                  <span className="px-4 text-sm text-gray-600 align-text-bottom">{data.category}</span>
+                </div>
+  
+                <div className="pt-3 px-6 pb-6">
+                  <p className="leading-tight">{data.des}</p>
+                </div>
+              </div>
+            ))}
+
+          </div>
+          <div className="flex justify-end">
+            <a href='/community'>
+              <button className="mt-8 text-black text-sm px-6 py-0 rounded-full inline-flex">
+                더 많은 스타트업 보기 <ArrowRight className="ml-2 h-4 w-4" />
+              </button>
+            </a>
+          </div>
+{/* 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="relative h-96 bg-blue-100 rounded-lg overflow-hidden">
               <Image
@@ -406,98 +449,98 @@ export default function Home() {
                 <h3 className="text-white text-xl font-semibold">관광콘텐츠육성</h3>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         
         {/** review 섹션 */}
         <div className="container mx-auto px-4 py-8 relative h-full">
           <div className="grid grid-cols-3 gap-8 h-[800px] overflow-x-scroll">
             {/* content */}
-            <div className="relative overflow-hidden min-h-[350px]">
+            <div className="relative overflow-hidden min-h-[350px] bg-gray-200 rounded-lg">
               
               <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <h2 className="text-black text-2xl font-bold mb-2">Workation Lifestyle in Busan</h2>
-                <p className="text-black text-sm">개성있는 워케이션 라이프스타일을 소개합니다.</p>
+                <h2 className="text-black text-2xl font-bold mb-2">Share Workation Lifestyle<br/>with Neighbors</h2>
+                <p className="text-black text-sm">일상을 사람들과 공유해보세요.</p>
                 <button className="mt-8 text-black text-sm  py-0 rounded-full inline-flex items-center justify-start">
-                  <span></span>직접 경험해보기 <ArrowRight className="ml-2 h-4 w-4 flex" />
+                  <span></span>직접 포스트하기 <ArrowRight className="ml-2 h-4 w-4 flex" />
                 </button>
               </div>
             </div>
             {/* review 1 */}
             <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
               <Image
-                src="/review/1.jpg"
+                src="/review/01.jpg"
                 alt="Hot spring"
                 width={600}
                 height={400}
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
-                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">계절보양여행</span>
-                <h2 className="text-white text-2xl font-bold mb-2">온천관광휴양지</h2>
-                <p className="text-white text-sm">국내 유일 자연온천으로 유명한 울진의 온천관광특구를 소개합니다.</p>
+                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">@gonzzi</span>
+                <h2 className="text-white text-2xl font-bold mb-2">오늘의 부산 찐 맛집 추천</h2>
+                <p className="text-white text-sm">♡ 11</p>
               </div>
             </div>
 
             {/* review 2 */}
             <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
               <Image
-                src="/review/2.avif"
+                src="/review/02.jpg"
                 alt="Forest trail"
                 width={600}
                 height={400}
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
-                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">울진트래킹</span>
-                <h2 className="text-white text-2xl font-bold mb-2">금강소나무 숲길</h2>
-                <p className="text-white text-sm">호젓하고 낭만적인 울진에서 힐링스 기특한 여행코스를 추천해드립니다.</p>
+                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">@bussanai</span>
+                <h2 className="text-white text-2xl font-bold mb-2">수상레포츠스쿨 체험 후기!</h2>
+                <p className="text-white text-sm">♡ 15</p>
               </div>
             </div>
 
             {/* review 3 */}
             <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
               <Image
-                src="/review/3.jpeg"
+                src="/review/03.jpg"
                 alt="Scenic view"
                 width={600}
                 height={400}
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
-                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">일출 맛집</span>
-                <h2 className="text-white text-2xl font-bold mb-2">울진 바다</h2>
-                <p className="text-white text-sm">동해바다의 아름다운 해돋이 풍경을 만날 수 있는 울진해수욕장을 소개합니다.</p>
+                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">@gotssaeng</span>
+                <h2 className="text-white text-2xl font-bold mb-2">갓생 사는 워케이션 루틴 공유</h2>
+                <p className="text-white text-sm">♡ 7</p>
               </div>
             </div>
             {/* review 4 */}
             <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
               <Image
-                src="/review/4.jpeg"
+                src="/review/04.jpg"
                 alt="Scenic view"
                 width={600}
                 height={400}
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
-                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">일출 맛집</span>
-                <h2 className="text-white text-2xl font-bold mb-2">울진 바다</h2>
-                <p className="text-white text-sm">동해바다의 아름다운 해돋이 풍경을 만날 수 있는 울진해수욕장을 소개합니다.</p>
+                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">@offthereocrd</span>
+                <h2 className="text-white text-2xl font-bold mb-2">카공 잘되는 해운대 근처 카페 찐 후기</h2>
+                <p className="text-white text-sm">♡ 10</p>
               </div>
             </div>
             {/* review 5 */}
             <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
               <Image
-                src="/review/5.jpeg"
+                src="/review/05.jpg"
                 alt="Scenic view"
                 width={600}
                 height={400}
                 className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
-                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">일출 맛집</span>
-                <h2 className="text-white text-2xl font-bold mb-2">울진 바다</h2>
-                <p className="text-white text-sm">동해바다의 아름다운 해돋이 풍경을 만날 수 있는 울진해수욕장을 소개합니다.</p>
+                <span className="text-white text-sm mb-2 border border-white px-2 py-1 rounded w-fit">@devKim</span>
+                <h2 className="text-white text-2xl font-bold mb-2">개발자가 추천하는 자전거 투어 코스</h2>
+                <p className="text-white text-sm">♡ 4</p>
               </div>
             </div>
           </div>
@@ -515,13 +558,13 @@ export default function Home() {
             <header className="mb-auto">
               <h1 className="text-white text-4xl font-bold pt-3"></h1>
               <h2 className="text-white text-5xl font-bold mt-2 leading-snug">부산에서의 라이프스타일에<br />빠져들었나요?</h2>
-              <button className="mt-4 px-6 py-2 bg-white bg-opacity-20 text-white rounded-full flex items-center">
+              <button className="mt-4 px-6 py-2 text-white rounded-full flex items-center" style={{backgroundColor: "rgba(255, 255, 255, 0.2)"}}>
                 New lifestyle in Busan <ArrowRight className="ml-2 h-4 w-4" />
               </button>
             </header>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-6">
+              <div className="backdrop-blur-md rounded-lg p-6" style={{backgroundColor: "rgba(255, 255, 255, 0.2)"}}>
                 <h3 className="text-white text-2xl font-bold mb-2">Business in Busan</h3>
                 <p className="text-white text-sm mb-8">부산은 여러분들의 비즈니스 성장을 시작하기에 최적입니다.</p>
                 <div className="flex space-x-4">
@@ -541,10 +584,10 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <button className="flex items-center justify-between bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-4 text-white">
+              <button className="flex items-center justify-between backdrop-blur-md rounded-lg p-4 text-white" style={{backgroundColor: "rgba(255, 255, 255, 0.2)"}}>
                 <span>문의 바로가기</span>
               </button>
-              <button className="flex items-center justify-between bg-white bg-opacity-20 backdrop-blur-md rounded-lg p-4 text-white">
+              <button className="flex items-center justify-between backdrop-blur-md rounded-lg p-4 text-white" style={{backgroundColor: "rgba(255, 255, 255, 0.2)"}}>
                 <span>정보 알아보기</span>
               </button>
             </div>
