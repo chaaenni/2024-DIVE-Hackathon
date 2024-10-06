@@ -166,16 +166,16 @@ export default function Recommend(){
                     </div>
                     <div className='flex mt-10 tracking-tight'>  {/*category button*/}
                         <button className={`mr-3 px-5 py-3 rounded-[50px] text-[14px] 
-                        ${isLeisure? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff]'}`} 
+                        ${isLeisure? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'hover:bg-blue-600 bg-[#237cfe] text-[#ffffff] border-[#ffffff]'}`} 
                         onClick={clickLeisure}>레저 / 액티비티</button>
-                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[50px] text-[#ffffff] text-[14px]'>맛집 탐방</button>
-                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[50px] text-[#ffffff] text-[14px]'>문화 생활</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] hover:bg-blue-600 rounded-[50px] text-[#ffffff] text-[14px]'>맛집 탐방</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] hover:bg-blue-600 rounded-[50px] text-[#ffffff] text-[14px]'>문화 생활</button>
                         {/* <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[50px] text-[#ffffff] text-[14px]'>쇼핑</button> */}
-                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[50px] text-[#ffffff] text-[14px]'>휴식 / 릴렉스</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] hover:bg-blue-600 rounded-[50px] text-[#ffffff] text-[14px]'>휴식 / 릴렉스</button>
                         {/* 휴식/릴렉스에는  */}
-                        <button className='mr-3 px-5 py-3 bg-[#237cfe] rounded-[50px] text-[#ffffff] text-[14px]'>워커홀릭</button>
+                        <button className='mr-3 px-5 py-3 bg-[#237cfe] hover:bg-blue-600 rounded-[50px] text-[#ffffff] text-[14px]'>워커홀릭</button>
                         <button className={`mr-3 px-5 py-3 rounded-[50px] text-[14px] 
-                        ${isBicycle? 'bg-[#ffffff] text-[#237cfe] font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff'}`} 
+                        ${isBicycle? 'bg-[#ffffff] text-[#237cfe] hover:bg-blue-600 font-bold border-[2px] border-[#237cfe]': 'bg-[#237cfe] text-[#ffffff] border-[#ffffff'}`} 
                         onClick={clickBicycle}>자전거 대여소</button>
                     </div> 
                     {/* leisure details */}

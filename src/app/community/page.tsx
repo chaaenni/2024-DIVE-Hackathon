@@ -189,6 +189,7 @@ export default function Community() {
     console.log("Form submitted")
     setAddEvent(false)
   }
+  const [newEvent, setnewEvent] = useState(false);
   return (
     <>
       <div className="w-full">
@@ -216,6 +217,21 @@ export default function Community() {
                         </button>
                       </div>
                     ))}
+                    {newEvent && (
+                      <div className="flex items-start space-x-4 mb-4 last:mb-0">
+                      <div className="flex-grow">
+                        <h2 className="font-semibold">장채연</h2>
+                        <div className="text-sm text-gray-500 flex items-center">
+                          <CalendarIcon className="w-4 h-4 mr-1" />
+                          October 6th, 2024
+                        </div>
+                        
+                      </div>
+                      <button className="text-gray-400 hover:text-gray-600">
+                        <MoreHorizontal className="w-5 h-5" />
+                      </button>
+                    </div>
+                    )}
                   </div>
                   <div className="space-y-4 h-full">
                     <div>
@@ -256,7 +272,8 @@ export default function Community() {
                       
                     </div>
                     <button onClick={()=>{
-                      {addEvent ? setAddEvent(false) : setAddEvent(true)}
+                      {addEvent ? setAddEvent(false) : setAddEvent(true)};
+                      {addEvent ? setnewEvent(true): ""};
                     }} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-black text-white text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full">
                       {addEvent ? "Save event" : "Add event"}
                     </button>
@@ -296,7 +313,7 @@ export default function Community() {
                 </h1>
                 <p className="text-lg text-gray-600">네트워킹을 통해 성장하는 기업 그리고 부산</p>
               </header>
-              <div>
+              <div className="">
                 <div className="grid grid-cols-6 border py-4 mb-8 px-6">
                   {categories.map((category) => (
                     <div key={category} className="flex items-center space-x-2 mb-2">
@@ -316,7 +333,7 @@ export default function Community() {
                 <div className=" grid grid-cols-2 gap-4">
                   {company && currentItems.map((data, index)=>(
                     <button onClick={() => setLoading(true)} className="">
-                      <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-[120px]">
+                      <div className="rounded-lg border shadow-sm h-[120px]">
                         <div className="flex flex-row p-4 px-6 border-b">
                           <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
                             {data.name}
@@ -324,7 +341,7 @@ export default function Community() {
                           <span className="px-4 text-sm text-gray-600 align-text-bottom">{data.category}</span>
                         </div>
                         <div className="pt-3 px-6 pb-6">
-                          <p className="leading-tight">{data.des}</p>
+                          <p className="leading-tight text-left">{data.des}</p>
                         </div>
                       </div>
                     </button>
