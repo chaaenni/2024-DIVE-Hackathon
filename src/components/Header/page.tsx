@@ -54,10 +54,10 @@ export default function Header() {
             <nav>
               <ul className="flex font-bold text-lg gap-6">
                 <li className="px-4">
-                  <Link href="/myworkation" className="text-white hover:border-b pb-1 hover:font-extrabold">나만의 워케이션</Link>
+                  <Link href="/recommend" className="text-white hover:border-b pb-1 hover:font-extrabold">나만의 워케이션</Link>
                 </li>
                 <li className="px-4">
-                  <Link href="/community" className="text-white hover:border-b pb-1 hover:font-extrabold">커뮤니티</Link>
+                  <Link href="/community" className="text-white hover:border-b pb-1 hover:font-extrabold">네트워킹</Link>
                 </li>
                 <li className="px-4">
                   <Link href="#" className="text-white hover:border-b pb-1 hover:font-extrabold">매거진</Link>

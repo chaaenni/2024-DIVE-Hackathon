@@ -279,7 +279,7 @@ export default function Home() {
               <button onClick={() => {
                 setLoading(true);
                 setStep(1);
-              }} className="//bg-black bg-blue-600 text-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-full">
+              }} className="//bg-black bg-blue-600 hover:bg-blue-700 text-white inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-full">
                 나의 워케이션 로망은? <ChevronDown className="ml-2 h-4 w-4" />
               </button>
             </div>
@@ -361,7 +361,9 @@ export default function Home() {
 */}
 
         {/** Section 2 */}
-        <div className="container mx-auto mb-10 px-4 py-8 relative">
+        <div className="bg-slate-100">
+        <div className="container mx-auto mb-10 px-4 py-16 relative ">
+
           <header className="mb-8">
             <h2 className="text-sm text-gray-600 mb-2">네트워킹</h2>
             <h1 className="text-4xl font-bold mb-2">
@@ -370,27 +372,31 @@ export default function Home() {
             <p className="text-2xl text-gray-700">장기적인 인적 네트워크를 형성하세요.</p>
           </header>
 
-          <div className=" grid grid-cols-2 gap-4">
-            {slicedStartUp && slicedStartUp.map((data, index)=>(
-                <div className="rounded-lg border bg-card text-card-foreground shadow-sm h-[120px]">
-                <div className="flex flex-row p-4 px-6 border-b">
-                  <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
-                    {data.name}
-                  </h3>
-                  <span className="px-4 text-sm text-gray-600 align-text-bottom">{data.category}</span>
-                </div>
-  
-                <div className="pt-3 px-6 pb-6">
-                  <p className="leading-tight">{data.des}</p>
-                </div>
-              </div>
-            ))}
+          <div className="flex gap-4">
+            <Image src="/review/4.jpeg" alt="Networking" width={1000} height={800} className="rounded-lg object-cover" />
 
+            <div className=" grid grid-cols-1 ">
+              {slicedStartUp && slicedStartUp.map((data, index)=>(
+                  <div className="border-b border-gray-300 bg-card text-card-foreground shadow-sm h-[120px]">
+                  <div className="flex flex-row p-4 px-6">
+                    <h3 className="whitespace-nowrap text-2xl font-semibold leading-none tracking-tight">
+                      {data.name}
+                    </h3>
+                    <span className="px-4 text-sm text-gray-600 align-text-bottom">{data.category}</span>
+                  </div>
+
+                  <div className="pt-3 px-6 pb-6">
+                    <p className="leading-tight">{data.des}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+          
           <div className="flex justify-end">
             <a href='/community'>
               <button className="mt-8 text-black text-sm px-6 py-0 rounded-full inline-flex">
-                더 많은 스타트업 보기 <ArrowRight className="ml-2 h-4 w-4" />
+                더 많은 회사 보기 <ArrowRight className="ml-2 h-4 w-4" />
               </button>
             </a>
           </div>
@@ -451,6 +457,7 @@ export default function Home() {
             </div>
           </div> */}
         </div>
+        </div>
         
         {/** review 섹션 */}
         <div className="container mx-auto px-4 py-8 relative h-full">
@@ -467,7 +474,7 @@ export default function Home() {
               </div>
             </div>
             {/* review 1 */}
-            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
+            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px] hover:border-gray-300 hover:border-4">
               <Image
                 src="/review/01.jpg"
                 alt="Hot spring"
@@ -483,7 +490,7 @@ export default function Home() {
             </div>
 
             {/* review 2 */}
-            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
+            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px] hover:border-gray-300 hover:border-4">
               <Image
                 src="/review/02.jpg"
                 alt="Forest trail"
@@ -499,7 +506,7 @@ export default function Home() {
             </div>
 
             {/* review 3 */}
-            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
+            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px] hover:border-gray-300 hover:border-4">
               <Image
                 src="/review/03.jpg"
                 alt="Scenic view"
@@ -514,7 +521,7 @@ export default function Home() {
               </div>
             </div>
             {/* review 4 */}
-            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
+            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px] hover:border-gray-300 hover:border-4">
               <Image
                 src="/review/04.jpg"
                 alt="Scenic view"
@@ -529,7 +536,7 @@ export default function Home() {
               </div>
             </div>
             {/* review 5 */}
-            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px]">
+            <div className="relative overflow-hidden rounded-lg shadow-lg min-h-[350px] hover:border-gray-300 hover:border-4">
               <Image
                 src="/review/05.jpg"
                 alt="Scenic view"
@@ -595,11 +602,7 @@ export default function Home() {
         </div>
       </div>
       {/** footer */}
-      <footer className="relative w-full z-[999] bg-white h-[80px] flex items-center">
-        <div className="container mx-auto py-4 px-4">
-          <p className="text-md font-light">Generated by 곤지곤지</p>
-        </div>
-      </footer>
+      
     </div>
   );
 }
@@ -642,11 +645,11 @@ const Step1:React.FC<StepProps> = ({ userData, updateUserData}) => {
 }
 
 const workation_type = [
-  {name: "레저 및 스포츠", des: "푸켓 특급 리조트"},
-  {name: "문화 체험", des: "푸켓 요트 투어"},
-  {name: "힐링", des: "푸켓 마사지 패키지"},
-  {name: "휴양", des: "푸켓 특급 리조트"},
-  {name: "기타", des: "푸켓 요트 투어"},
+  {name: "레저 및 스포츠", des: "퇴근 후 서핑 어때?"},
+  {name: "문화 체험", des: "1일 1영화 즐기자"},
+  {name: "힐링", des: "노을 지는 바다를 바라볼래"},
+  {name: "휴양", des: "난 호캉스를 즐기겠어"},
+  {name: "기타", des: ""},
 ]
 
 const Step2:React.FC<StepProps> = ({ userData, updateUserData}) => {
